@@ -459,7 +459,7 @@ Rickshaw.Graph = function(args) {
 			if (!Array.isArray(s.data)) {
 				throw "series data is not an array: " + JSON.stringify(s.data);
 			}
-			
+
 			if (s.data.length > 0) {
 				var x = s.data[0].x;
 				var y = s.data[0].y;
@@ -568,7 +568,7 @@ Rickshaw.Graph = function(args) {
 
 			var layout = d3.layout.stack();
 			layout.offset( self.offset );
-			stackedData = layout(data);
+			stackedData = data.length ? layout(data) : data;
 		}
 
 		stackedData = stackedData || data;
@@ -1931,6 +1931,8 @@ Rickshaw.Graph.Behavior.Series.Toggle = function(args) {
 				line.element.classList.add('disabled');
 			}
 
+			self.graph.update();
+
 		}.bind(this);
 		
                 var label = line.element.getElementsByTagName('span')[0];
@@ -1976,6 +1978,8 @@ Rickshaw.Graph.Behavior.Series.Toggle = function(args) {
 
                         }
 
+                        self.graph.update();
+
                 };
 
 	};
@@ -2017,12 +2021,10 @@ Rickshaw.Graph.Behavior.Series.Toggle = function(args) {
 				}
 				
 				s.disabled = true;
-				self.graph.update();
 			};
 
 			s.enable = function() {
 				s.disabled = false;
-				self.graph.update();
 			};
 		} );
 	};
@@ -3759,7 +3761,6 @@ Rickshaw.Graph.Smoother = Rickshaw.Class.create({
 					max: 100,
 					slide: function( event, ui ) {
 						self.setScale(ui.value);
-						self.graph.update();
 					}
 				} );
 			} );
