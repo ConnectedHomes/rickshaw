@@ -604,10 +604,10 @@ Rickshaw.Graph = function(args) {
 
 			pointsCount = pointsCount || s.data.length;
 
-			if (pointsCount && s.data.length != pointsCount) {
-				throw "stacked series cannot have differing numbers of points: " +
-					pointsCount + " vs " + s.data.length + "; see Rickshaw.Series.fill()";
-			}
+			//if (pointsCount && s.data.length != pointsCount) {
+			//	throw "stacked series cannot have differing numbers of points: " +
+			//		pointsCount + " vs " + s.data.length + "; see Rickshaw.Series.fill()";
+			//}
 
 		}, this );
 	};
