@@ -74,7 +74,9 @@ Rickshaw.Graph.Renderer.Bar = Rickshaw.Class.create( Rickshaw.Graph.Renderer, {
 				.attr("y", function(d) { return (graph.y(d.y0 + Math.abs(d.y))) * (d.y < 0 ? -1 : 1 ) })
 				.attr("width", seriesBarWidth)
 				.attr("height", function(d) { return graph.y.magnitude(Math.abs(d.y)) })
-				.attr("transform", transform);
+				.attr("transform", transform)
+				.attr("data-x", function(d) { return d.x })
+				.attr("data-y", function(d) { return d.y });
 
 			Array.prototype.forEach.call(nodes[0], function(n) {
 				n.setAttribute('fill', series.color);
