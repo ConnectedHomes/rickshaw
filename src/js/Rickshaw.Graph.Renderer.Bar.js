@@ -75,6 +75,8 @@ Rickshaw.Graph.Renderer.Bar = Rickshaw.Class.create( Rickshaw.Graph.Renderer, {
 				.attr("width", seriesBarWidth)
 				.attr("height", function(d) { return graph.y.magnitude(Math.abs(d.y)) })
 				.attr("transform", transform)
+				.attr("class", 'bar-' + series.name)
+				.attr("data-series", series.name)
 				.attr("data-x", function(d) { return d.x })
 				.attr("data-y", function(d) { return d.y });
 
