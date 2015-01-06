@@ -3098,12 +3098,16 @@ Rickshaw.Graph.Renderer = Rickshaw.Class.create( {
 
 	_styleSeries: function(series) {
 
-		var fill = this.fill ? series.color : 'none';
-		var stroke = this.stroke ? series.color : 'none';
+		var fill = this.fill ? series.color || null : null;
+		var stroke = this.stroke ? series.color || null : null;
 
-		series.path.setAttribute('fill', fill);
-		series.path.setAttribute('stroke', stroke);
-		series.path.setAttribute('stroke-width', this.strokeWidth);
+		if (fill) {
+			series.path.setAttribute('fill', fill);
+		}
+		if (stroke) {
+			series.path.setAttribute('stroke', stroke);
+			series.path.setAttribute('stroke-width', this.strokeWidth);
+		}
 
 		if (series.className) {
 			d3.select(series.path).classed(series.className, true);
@@ -3299,9 +3303,11 @@ Rickshaw.Graph.Renderer.Bar = Rickshaw.Class.create( Rickshaw.Graph.Renderer, {
 				.attr("data-x", function(d) { return d.x })
 				.attr("data-y", function(d) { return d.y });
 
-			Array.prototype.forEach.call(nodes[0], function(n) {
-				n.setAttribute('fill', series.color);
-			} );
+			if (series.color) {
+				Array.prototype.forEach.call(nodes[0], function(n) {
+					n.setAttribute('fill', series.color);
+				} );
+			}
 
 			if (this.unstack) barXOffset += seriesBarWidth;
 

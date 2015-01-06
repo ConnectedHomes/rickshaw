@@ -80,9 +80,11 @@ Rickshaw.Graph.Renderer.Bar = Rickshaw.Class.create( Rickshaw.Graph.Renderer, {
 				.attr("data-x", function(d) { return d.x })
 				.attr("data-y", function(d) { return d.y });
 
-			Array.prototype.forEach.call(nodes[0], function(n) {
-				n.setAttribute('fill', series.color);
-			} );
+			if (series.color) {
+				Array.prototype.forEach.call(nodes[0], function(n) {
+					n.setAttribute('fill', series.color);
+				} );
+			}
 
 			if (this.unstack) barXOffset += seriesBarWidth;
 
