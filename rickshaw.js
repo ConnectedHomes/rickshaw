@@ -3293,8 +3293,12 @@ Rickshaw.Graph.Renderer.Bar = Rickshaw.Class.create( Rickshaw.Graph.Renderer, {
 			var nodes = vis.selectAll("path")
 				.data(series.stack.filter( function(d) { return d.y !== null } ))
 				.enter().append("svg:rect")
-				.attr("x", function(d) { return graph.x(d.x) + barXOffset })
-				.attr("y", function(d) { return (graph.y(d.y0 + Math.abs(d.y))) * (d.y < 0 ? -1 : 1 ) })
+				.attr("x", function(d) {
+					return graph.x(d.x) + barXOffset;
+				})
+				.attr("y", function(d) {
+					return (graph.y((d.y0 || 0) + Math.abs(d.y))) * (d.y < 0 ? -1 : 1 );
+				})
 				.attr("width", seriesBarWidth)
 				.attr("height", function(d) { return graph.y.magnitude(Math.abs(d.y)) })
 				.attr("transform", transform)
