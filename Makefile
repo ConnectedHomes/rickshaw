@@ -84,8 +84,7 @@ $(NODEUNIT):
 rickshaw.css: $(CSS_FILES)
 	cat $(CSS_FILES) > rickshaw.css
 
-rickshaw.js: $(JS_FILES) $(JS_HINT)
-	$(JS_HINT) src/js
+rickshaw.js: $(JS_FILES)
 	cat $(JS_FILES) > rickshaw.js
 
 rickshaw.min.css: $(CSS_MIN) rickshaw.css
